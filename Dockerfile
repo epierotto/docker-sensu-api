@@ -8,7 +8,8 @@ RUN \
 	wget -qO - http://repos.sensuapp.org/apt/pubkey.gpg | apt-key add - && \
 	echo "deb     http://repos.sensuapp.org/apt sensu main" > /etc/apt/sources.list.d/sensu.list && \
 	apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get install -y sensu
+	DEBIAN_FRONTEND=noninteractive apt-get install -y sensu && \
+	sed -i 's/files dns/dns files/g' /etc/nsswitch.conf
 
 # Add the sensu-server config files
 COPY files/api.json /etc/sensu/api.json
